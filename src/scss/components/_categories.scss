@@ -1,0 +1,28 @@
+@import "variables";
+
+.categories {
+  display: flex;
+  &__item {
+    background-color: #f9f9f9;
+    padding: 13px 30px;
+    border-radius: 30px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out;
+    @include noselect();
+
+    &:hover:not(.categories__item--active) {
+      background-color: darken(#f9f9f9, 2%);
+    }
+
+    &:active:not(.categories__item--active) {
+      background-color: darken(#f9f9f9, 5%);
+    }
+    
+    &--active {
+      background-color: #282828;
+      color: #fff;
+    }
+  }
+}
