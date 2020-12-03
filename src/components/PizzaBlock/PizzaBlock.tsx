@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 
-import { PizzaType } from '../App'
+import { PizzaType } from '../../store/reducers/pizzas'
 
 
 
 
-function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
+function PizzaBlock({ name, imageUrl, price, types, sizes } : PizzaType) {
   const typesPizza: string[] = ['тонкое', 'традиционное']
   const availableSizes: number[] = [26, 30, 40]
 
@@ -55,7 +55,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <div className="pizza-block__button button button--outline button--add">
           <svg
             width="12"
             height="12"

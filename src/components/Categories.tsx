@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 
+type activeType = number | null
+
 interface CategoriesTypeProps {
-  categories: string[]
+  categories: string[],
+  onFilter: (index: activeType) => void
 }
 
 
-function Categories({ categories }: CategoriesTypeProps): JSX.Element {
+const Categories = ({ categories, onFilter }: CategoriesTypeProps): JSX.Element => {
 
-  const [active, setActive] = useState<null | number>(null)
-
-  const selectActive = (index: number | null) => (e: React.MouseEvent): void => {
+  const [active, setActive] = useState<activeType>(null)
+  
+  const selectActive = (index: activeType) => (e: React.MouseEvent): void => {
     setActive(index)
+    onFilter(index)
   }
 
   return (
@@ -21,4 +25,4 @@ function Categories({ categories }: CategoriesTypeProps): JSX.Element {
   )
 }
 
-export default Categories
+export default React.memo(Categories)
