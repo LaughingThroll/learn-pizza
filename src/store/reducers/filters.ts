@@ -1,10 +1,10 @@
 interface FiltersActionType {
   type: string,
-  payload: number
+  payload: number | null
 }
 
 const initialState = {
-  filter: 0
+  filter: null
 }
 
 const filters = (state = initialState, action: FiltersActionType) => {

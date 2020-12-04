@@ -1,7 +1,8 @@
 import { PizzaType } from '../reducers/pizzas'
+import { SetPizzasEnum } from '../enums'
 
 const setPizzas = (pizzas: PizzaType[]) => ({
-  type: 'SET_PIZZAS',
+  type: SetPizzasEnum.SET,
   payload: pizzas
 })
 

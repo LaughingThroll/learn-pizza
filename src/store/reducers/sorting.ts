@@ -4,7 +4,7 @@ interface SortingActionType {
 }
 
 const initialState = {
-  sortBy: 'popular'
+  sortBy: 'rating'
 }
 
 

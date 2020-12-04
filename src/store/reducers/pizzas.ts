@@ -1,4 +1,7 @@
+import { SetPizzasEnum } from '../enums'
 import { ID } from '../../types'
+
+
 
 export interface PizzaType {
   id: ID,
@@ -27,18 +30,23 @@ const initialState = {
 
 const pizzasReducer = (state = initialState, action: PizzasActionType) => {
   switch (action.type) {
-    case 'SET_PIZZAS':
+    case SetPizzasEnum.SET:
       return {
         ...state,
         pizzas: action.payload,
         isLoaded: true
       }
-    case 'SET_PIZZAS_LENGTH':
+    case SetPizzasEnum.LENGTH:
       return {
         ...state,
         length: action.payload,
 
       }
+    case SetPizzasEnum.LOADED: 
+      return {
+        ...state,
+        isLoaded: action.payload
+      }    
     default:
       return state
   }

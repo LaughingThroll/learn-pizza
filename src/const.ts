@@ -10,7 +10,7 @@ export const CATEGORIES_ARR: string[] = ['Мясные', 'Вегетарианс
 export const SORTING_ARR: SortingObjectType[] = [
   {
     name: 'популярности',
-    type: 'popular'
+    type: 'rating'
   },
   {
     name: 'цене',
@@ -18,6 +18,6 @@ export const SORTING_ARR: SortingObjectType[] = [
   },
   {
     name: 'алфавиту',
-    type: 'alphabet'
+    type: 'title'
   }
 ]

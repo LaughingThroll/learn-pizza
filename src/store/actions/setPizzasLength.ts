@@ -1,6 +1,7 @@
+import { SetPizzasEnum } from '../enums'
 
 const setPizzasLength = (length: number) => ({
-  type: 'SET_PIZZAS_LENGTH',
+  type: SetPizzasEnum.LENGTH,
   payload: length
 })
 
