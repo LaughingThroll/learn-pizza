@@ -4,7 +4,7 @@ type activeType = number | null
 
 interface CategoriesTypeProps {
   categories: string[],
-  activeCategory: number | null,
+  activeCategory: activeType,
   onFilter: (index: activeType) => void
 }
 

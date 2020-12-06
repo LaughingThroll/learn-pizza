@@ -1,8 +1,9 @@
-import { SetPizzasEnum } from '../enums'
+import { PizzasEnum } from '../enums'
+import { PizzasActions } from '../types'
 
-const setPizzasLoaded = (loaded: boolean) => ({
-  type: SetPizzasEnum.LOADED,
-  payload: loaded
+const setPizzasLoaded = (payload: boolean): PizzasActions => ({
+  type: PizzasEnum.LOADED,
+  payload
 })
 
 export default setPizzasLoaded

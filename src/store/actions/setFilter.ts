@@ -1,6 +1,9 @@
-const setFilter = (filter: number | null) => ({
-  type: 'SET_FILTER',
-  payload: filter
+import { FilterEnum } from '../enums'
+import { FiltersActions, filterPayload } from '../types'
+
+const setFilter = (payload: filterPayload): FiltersActions => ({
+  type: FilterEnum.SET,
+  payload
 })
 
 

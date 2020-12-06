@@ -9,7 +9,7 @@ import { Home, Cart } from './pages/index'
 
 
 function App() {
-  
+
 
   return (
     <div className="wrapper">

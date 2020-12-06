@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Categories, Sort, PizzaBlock, PizzaLoading } from '../components'
 import { CATEGORIES_ARR, SORTING_ARR } from '../const'
+import { IPizzaTypes } from '../types'
 
-import { setFilter, setPizzasLoaded, setSortBy } from '../store/actions'
-import { PizzaType } from '../store/reducers/pizzas'
+import { setFilter, setPizzasLoaded, setSortBy, addToCart } from '../store/actions'
 import { preFetchPizzas, fetchPizzas } from '../store/thunks/fetchPizzas'
 
 
 function Home() {
   const dispatch = useDispatch()
 
-  const pizzas = useSelector(({ pizzasReducer: { pizzas } }: any): PizzaType[] => pizzas)
+  const pizzas = useSelector(({ pizzasReducer: { pizzas } }: any): IPizzaTypes[] => pizzas)
   const lengthPizzas = useSelector(({ pizzasReducer: { length } }: any): any => length.length)
   const isLoaded = useSelector(({ pizzasReducer: { isLoaded } }: any): boolean => isLoaded)
   const activeFilter = useSelector(({ filters: { filter } }: any): null | number  => filter)
@@ -36,14 +36,10 @@ function Home() {
         dispatch(fetchPizzas(activeFilter, activeSortBy))
       }
     })
-
-
-
-
-
   }, [dispatch, pizzas.length, isLoaded, activeFilter, activeSortBy])
 
-  
+
+  // addToCart()
   return (
     <div className="container">
       <div className="content__top">

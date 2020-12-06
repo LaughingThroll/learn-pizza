@@ -1,16 +1,18 @@
-interface SortingActionType {
-  type: string,
-  payload: string 
+import { SortEnum } from '../enums'
+import { SortActions } from '../types'
+
+interface ISortStateTypes {
+  sortBy: string
 }
 
-const initialState = {
+const initialState: ISortStateTypes = {
   sortBy: 'rating'
 }
 
 
 
- const sorting = (state = initialState, action: SortingActionType) => {
-  if (action.type === 'SET_SORT_BY') {
+ const sorting = (state = initialState, action: SortActions) => {
+  if (action.type === SortEnum.SET) {
     return {
       ...state,
       sortBy: action.payload

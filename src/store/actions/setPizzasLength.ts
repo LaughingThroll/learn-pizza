@@ -1,8 +1,9 @@
-import { SetPizzasEnum } from '../enums'
+import { PizzasEnum } from '../enums'
+import { PizzasActions } from '../types'
 
-const setPizzasLength = (length: number) => ({
-  type: SetPizzasEnum.LENGTH,
-  payload: length
+const setPizzasLength = (payload: number): PizzasActions => ({
+  type: PizzasEnum.LENGTH,
+  payload
 })
 
 

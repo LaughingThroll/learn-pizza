@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 
-import { PizzaType } from '../../store/reducers/pizzas'
+import { IPizzaTypes } from '../../types'
 
 
 
 
-function PizzaBlock({ name, imageUrl, price, types, sizes } : PizzaType) {
+function PizzaBlock({ name, imageUrl, price, types, sizes } : IPizzaTypes) {
   const typesPizza: string[] = ['тонкое', 'традиционное']
   const availableSizes: number[] = [26, 30, 40]
 

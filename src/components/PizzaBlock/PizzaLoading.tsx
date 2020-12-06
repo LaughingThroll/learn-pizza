@@ -1,10 +1,8 @@
 
 import React from 'react'
-// import ContentLoader from 'react-content-loader'
 
-interface IProps { }
 
-const PizzaLoading: React.FC<IProps> = () => {
+const PizzaLoading: React.FC = () => {
   return (
     <div  className="pizza-block pizza-block--loading">
     <div className="pizza-block__image"/>

@@ -1,48 +1,36 @@
-import { SetPizzasEnum } from '../enums'
-import { ID } from '../../types'
+import { IPizzaTypes } from '../../types'
+import { PizzasEnum } from '../enums'
+import { PizzasActions } from '../types'
 
-
-
-export interface PizzaType {
-  id: ID,
-  imageUrl: string,
-  name: string,
-  types: number[],
-  sizes: number[],
-  price: number,
-  category: number,
-  rating: number
-}
-
-interface PizzasActionType {
-  type: string,
-  payload: PizzaType[],
+interface IPizzasStateTypes {
+  pizzas: IPizzaTypes[],
   length: number,
   isLoaded: boolean
 }
 
-const initialState = {
+
+const initialState: IPizzasStateTypes = {
   pizzas: [],
   length: 0,
   isLoaded: false
 }
 
 
-const pizzasReducer = (state = initialState, action: PizzasActionType) => {
+const pizzasReducer = (state = initialState, action: PizzasActions) => {
   switch (action.type) {
-    case SetPizzasEnum.SET:
+    case PizzasEnum.SET:
       return {
         ...state,
         pizzas: action.payload,
         isLoaded: true
       }
-    case SetPizzasEnum.LENGTH:
+    case PizzasEnum.LENGTH:
       return {
         ...state,
         length: action.payload,
 
       }
-    case SetPizzasEnum.LOADED: 
+    case PizzasEnum.LOADED: 
       return {
         ...state,
         isLoaded: action.payload

@@ -1,9 +1,10 @@
-import { PizzaType } from '../reducers/pizzas'
-import { SetPizzasEnum } from '../enums'
+import { IPizzaTypes } from '../../types'
+import { PizzasEnum } from '../enums'
+import { PizzasActions } from '../types' 
 
-const setPizzas = (pizzas: PizzaType[]) => ({
-  type: SetPizzasEnum.SET,
-  payload: pizzas
+const setPizzas = (payload: IPizzaTypes[]): PizzasActions => ({
+  type: PizzasEnum.SET,
+  payload
 })
 
 

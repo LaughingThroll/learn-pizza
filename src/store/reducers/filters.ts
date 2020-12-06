@@ -1,14 +1,16 @@
-interface FiltersActionType {
-  type: string,
-  payload: number | null
+import { FilterEnum } from '../enums'
+import { filterPayload, FiltersActions } from '../types'
+
+interface IFiltersStateTypes {
+  filter: filterPayload
 }
 
-const initialState = {
+const initialState: IFiltersStateTypes = {
   filter: null
 }
 
-const filters = (state = initialState, action: FiltersActionType) => {
-    if (action.type === 'SET_FILTER') {
+const filters = (state = initialState, action: FiltersActions) => {
+    if (action.type === FilterEnum.SET) {
       return {
         ...state,
         filter: action.payload
