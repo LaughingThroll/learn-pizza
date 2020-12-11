@@ -4,8 +4,8 @@ export interface SortingObjectType {
 }
 
 
-export const URL_PIZZAS: string = 'http://localhost:3004/pizza'
-export const URL_LENGTH: string = 'http://localhost:3004/length'
+export const URL_PIZZAS: string = '/pizza'
+export const URL_LENGTH: string = 'length'
 export const CATEGORIES_ARR: string[] = ['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 export const SORTING_ARR: SortingObjectType[] = [
   {
@@ -21,3 +21,7 @@ export const SORTING_ARR: SortingObjectType[] = [
     type: 'title'
   }
 ]
+
+
+export const TYPES_PIZZAS: string[] = ['тонкое', 'традиционное']
+export const AVAILABLE_SIZES: number[] = [26, 30, 40]

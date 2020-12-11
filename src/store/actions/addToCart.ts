@@ -1,8 +1,9 @@
+import { ICartPizza } from '../../types'
 import { CartEnum } from '../enums'
-import { ICartPizza, IAddCartActionTypes } from '../types'
+import { CartActions } from '../types'
 
 
-const addToCart = (payload: ICartPizza): IAddCartActionTypes => ({
+const addToCart = (payload: ICartPizza): CartActions => ({
   type: CartEnum.ADD,
   payload
 })

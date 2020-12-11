@@ -1,33 +1,40 @@
 import { Action } from 'redux'
 
 import { CartEnum, FilterEnum, PizzasEnum, SortEnum } from './enums'
-import { IPizzaTypes } from '../types'
+import { IPizzaTypes, ICartPizza, removeGroupFromCartTypes } from '../types'
 
 
 
 // CartTypes
-export interface ICartPizza {
-  id: number
-}
-
 export interface IAddCartActionTypes extends Action {
   type: CartEnum.ADD,
   payload: ICartPizza
 }
 
-export interface IPriceCartActionTypes extends Action {
-  type: CartEnum.TOTAL_PRICE,
-  payload: number
+
+export interface ICLearCartActionTypes extends Action {
+  type: CartEnum.CLEAR
 }
 
-export interface ICountCartActionTypes extends Action {
-  type: CartEnum.TOTAL_COUNT,
-  payload: number
+export interface IRemoveGroupCartActionTypes extends Action {
+  type: CartEnum.REMOVE_GROUP,
+  payload: removeGroupFromCartTypes
 }
 
+export interface IPlusCartPizzaActionTypes extends Action {
+  type: CartEnum.PLUS,
+  payload: string
+}
+export interface IMinusCartPizzaActionTypes extends Action {
+  type: CartEnum.MINUS,
+  payload: string
+}
 
-
-export type CartActions = IAddCartActionTypes | ICountCartActionTypes | IPriceCartActionTypes
+export type CartActions = IAddCartActionTypes 
+| ICLearCartActionTypes 
+| IRemoveGroupCartActionTypes
+| IPlusCartPizzaActionTypes
+| IMinusCartPizzaActionTypes
 
 
 // FilterTypes

@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 .button {
   display: inline-block;
@@ -74,11 +74,8 @@
       span {
         color: #fff;
       }
-
-      svg {
-        path {
-          fill: #fff;
-        }
+      svg path {
+        fill: #fff;
       }
     }
 
@@ -86,7 +83,21 @@
       background-color: darken($orange, 8%);
     }
   }
-
+  &--remove {
+    border-color: darken($color: $gray-line, $amount: 10);
+    background-color: #fff;
+    svg {
+      transform: rotate(45deg);
+      path {
+        fill: darken($color: $gray-line, $amount: 15);
+      }
+    }
+    &:hover,
+    &:active {
+      border-color: darken($color: $gray-line, $amount: 80);
+      background-color: darken($color: $gray-line, $amount: 80);
+    }
+  }
   &__delimiter {
     width: 1px;
     height: 25px;
@@ -145,4 +156,42 @@
       font-size: 16px;
     }
   }
+}
+
+
+.button-go-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 210px;
+  border-color: darken($color: $gray-line, $amount: 10);
+  padding: 16px;
+  span {
+    color: darken($color: $gray-line, $amount: 20);
+    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: darken($color: $gray-line, $amount: 90);
+    border-color: darken($color: $gray-line, $amount: 90);
+    span {
+      color: $gray-line;
+    }
+  }
+
+  svg {
+    margin-right: 12px;
+    path {
+      fill: transparent;
+      stroke-width: 2;
+    }
+  }
+}
+
+
+.pay-btn {
+  font-size: 16px;
+  font-weight: 600;
+  max-width: 210px;
+  padding: 16px;
 }
