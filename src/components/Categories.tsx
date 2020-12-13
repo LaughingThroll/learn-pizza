@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+type activeType = number | null
 
 interface CategoriesTypeProps {
-  categories: string[]
+  categories: string[],
+  activeCategory: activeType,
+  onFilter: (index: activeType) => void
 }
 
 
-function Categories({ categories }: CategoriesTypeProps): JSX.Element {
-
-  const [active, setActive] = useState<null | number>(null)
-
-  const selectActive = (index: number | null) => (e: React.MouseEvent): void => {
-    setActive(index)
+const Categories = ({ activeCategory, categories, onFilter }: CategoriesTypeProps): JSX.Element => {
+  
+  const selectActive = (index: activeType) => (e: React.MouseEvent): void => {
+    onFilter(index)
   }
 
   return (
     <ul className="categories">
-      <li className={`categories__item ${active === null ? 'categories__item--active' : ''}`} onClick={selectActive(null)} >Все</li>
-      {categories.map((category, index) => <li key={category + index} className={`categories__item ${active === index ? 'categories__item--active' : ''}`} onClick={selectActive(index)}> {category} </li>)}
+      <li className={`categories__item ${activeCategory === null ? 'categories__item--active' : ''}`} onClick={selectActive(null)} >Все</li>
+      {categories.map((category, index) => <li key={category + index} className={`categories__item ${activeCategory === index ? 'categories__item--active' : ''}`} onClick={selectActive(index)}> {category} </li>)}
     </ul>
   )
 }
 
-export default Categories
+export default React.memo(Categories)

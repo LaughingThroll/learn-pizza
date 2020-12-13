@@ -1,22 +1,37 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 
-import { PizzaType } from '../App'
+import Button from '../Button' 
+
+import { IPizzaTypes, ICartPizza } from '../../types'
+
+import { TYPES_PIZZAS, AVAILABLE_SIZES } from '../../const'
 
 
 
+interface IPizzaBlockPropsTypes extends IPizzaTypes  {
+  onClickAddToCart: (action: ICartPizza) => void,
+  count: number
+}
 
-function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
-  const typesPizza: string[] = ['тонкое', 'традиционное']
-  const availableSizes: number[] = [26, 30, 40]
-
-
+function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddToCart, count }: IPizzaBlockPropsTypes): JSX.Element {
   const [activeType, setActiveType] = useState<number>(types[0])
   const [activeSize, setActiveSize] = useState<number>(sizes[0])
  
 
-  const setActiveTypePizza = (index: number) => (e: React.MouseEvent) =>  setActiveType(index)
-  const setActiveSizePizza = (index: number) => (e: React.MouseEvent) =>  setActiveSize(index)
+  const setActiveTypePizza = (index: number) => (e: React.MouseEvent): void =>  setActiveType(index)
+  const setActiveSizePizza = (index: number) => (e: React.MouseEvent): void =>  setActiveSize(index)
+
+  const handleAddPizza = (): void => {
+    onClickAddToCart({
+      id, 
+      name, 
+      imageUrl, 
+      price, 
+      type: TYPES_PIZZAS[activeType], 
+      size: activeSize
+      })
+  }
 
   return (
     <div  className="pizza-block">
@@ -29,7 +44,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
       <div className="pizza-block__selector">
         
         <ul className="selector selector--by-dough">
-          {typesPizza.map((name, index) => {
+          {TYPES_PIZZAS.map((name, index) => {
             return   <li 
             key={`${name}_${index}`} 
             className={classNames({
@@ -41,7 +56,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
           })}
         </ul>
         <ul className="selector selector--by-sizes">
-        {availableSizes.map((size, index) => {
+        {AVAILABLE_SIZES.map((size, index) => {
             return   <li 
             key={`${size}_${index}`} 
             className={classNames({
@@ -55,7 +70,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <Button className="pizza-block__button button--add" onClick={handleAddPizza} outline>
           <svg
             width="12"
             height="12"
@@ -69,8 +84,8 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes } : PizzaType) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+        {count && <i>{count}</i>}
+        </Button>
       </div>
     </div>
   )
