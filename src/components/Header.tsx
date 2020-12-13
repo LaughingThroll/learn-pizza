@@ -10,6 +10,7 @@ import { Button } from './index'
 
 function Header() {
   const { totalCount, totalPrice } = useSelector(({ cart }: any) => cart)
+    
 
   return (
     <header className="header">
