@@ -1,9 +1,8 @@
+import { ISortStateTypes } from '../../types'
 import { SortEnum } from '../enums'
 import { SortActions } from '../types'
 
-interface ISortStateTypes {
-  sortBy: string
-}
+
 
 const initialState: ISortStateTypes = {
   sortBy: 'rating'

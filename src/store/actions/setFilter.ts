@@ -1,5 +1,6 @@
+import { filterPayload } from '../../types'
 import { FilterEnum } from '../enums'
-import { FiltersActions, filterPayload } from '../types'
+import { FiltersActions } from '../types'
 
 const setFilter = (payload: filterPayload): FiltersActions => ({
   type: FilterEnum.SET,

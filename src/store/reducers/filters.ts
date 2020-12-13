@@ -1,9 +1,8 @@
+import { IFiltersStateTypes } from '../../types'
 import { FilterEnum } from '../enums'
-import { filterPayload, FiltersActions } from '../types'
+import { FiltersActions } from '../types'
 
-interface IFiltersStateTypes {
-  filter: filterPayload
-}
+
 
 const initialState: IFiltersStateTypes = {
   filter: null

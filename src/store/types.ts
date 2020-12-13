@@ -1,7 +1,7 @@
 import { Action } from 'redux'
 
 import { CartEnum, FilterEnum, PizzasEnum, SortEnum } from './enums'
-import { IPizzaTypes, ICartPizza, removeGroupFromCartTypes } from '../types'
+import { IPizzaTypes, ICartPizza, removeGroupFromCartTypes, filterPayload } from '../types'
 
 
 
@@ -38,7 +38,6 @@ export type CartActions = IAddCartActionTypes
 
 
 // FilterTypes
-export type filterPayload = number | null
 
 export interface IFiltersActionTypes extends Action {
   type: FilterEnum.SET,
@@ -56,7 +55,6 @@ export interface ISortByActionTypes extends Action {
 export type SortActions = ISortByActionTypes
 
 // PizzasTypes
-
 
 
 

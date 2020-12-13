@@ -1,14 +1,10 @@
 import { flatObject } from '../../utils'
 
-import { ICartPizza, CartPizzasTypes, IThisPizzasTypes } from '../../types'
+import { ICartStateTypes, ICartPizza, CartPizzasTypes, IThisPizzasTypes } from '../../types'
 import { CartActions } from '../types'
 import { CartEnum } from '../enums'
 
-interface ICartStateTypes {
-  cartPizzas: CartPizzasTypes,
-  totalPrice: number,
-  totalCount: number
-}
+
 
 const initialState: ICartStateTypes = {
   cartPizzas: {},

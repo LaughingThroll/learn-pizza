@@ -48,7 +48,7 @@ function Sort({ activeSortBy, onSortBy, sorters }: SortingPropsType): JSX.Elemen
         {sorters.map(({ name, type }, index) => {
           return <li key={`${type}_${index}`} className={`sort-popup__item ${activeSortBy === type ? 'sort-popup__item--active' : ''}`} onClick={handleActiveSort(type)}>{name}</li>
         })}
-      </ul>}
+      </ul> }
     </div>
   )
 }

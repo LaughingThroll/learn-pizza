@@ -24,6 +24,11 @@ function Cart() {
   const onPlusPizza = (path: string): void => {dispatch(plusCartPizza(path))}
   const onMinusPizza = (path: string): void => {dispatch(minusCartPizza(path))}
 
+  const onPayPizza = () => {
+    alert('Ты почти оплатил свою пиццу. Зайди в консоль, чтобы посмотреть что ты заказал')
+    console.log('Твоя пицца', cartPizzas)
+  }
+
   const oneOfPizzas: IOneOfPizzasTypes[] = Object.keys(cartPizzas).flatMap(id => {
     return Object.keys(cartPizzas[id]).flatMap(type => {
       return Object.keys(cartPizzas[id][type]).flatMap(size => {
@@ -53,6 +58,7 @@ function Cart() {
       totalCount={totalCount}
       onPlusPizza={onPlusPizza} 
       onMinusPizza={onMinusPizza}
+      onPayPizza={onPayPizza}
       /> 
       : <CartEmpty /> }
     </div>

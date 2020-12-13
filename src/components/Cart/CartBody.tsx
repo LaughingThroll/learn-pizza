@@ -12,11 +12,17 @@ interface ICartBodyPropsTypes {
   onClearCart: () => void,
   onRemoveGroupFromCart: (path: string) => void,
   onPlusPizza: (path: string) => void,
-  onMinusPizza: (path: string) => void
+  onMinusPizza: (path: string) => void,
+  onPayPizza: () => void
 }
 
 
-const CartBody = ({ oneOfPizzas, onClearCart, onRemoveGroupFromCart, totalPrice, totalCount, onPlusPizza, onMinusPizza }: ICartBodyPropsTypes) => {
+const CartBody = ({ oneOfPizzas, onClearCart, onRemoveGroupFromCart, totalPrice, totalCount, onPlusPizza, onMinusPizza, onPayPizza }: ICartBodyPropsTypes) => {
+  
+  const handlePayPizza = (): void => {
+    onPayPizza()
+  }
+
   return (
     <div className="cart">
       <div className="cart__top">
@@ -59,7 +65,7 @@ const CartBody = ({ oneOfPizzas, onClearCart, onRemoveGroupFromCart, totalPrice,
             </svg>
             <span>Вернуться назад</span>
           </Link>
-          <Button className="cart-buttons__pay pay-btn">
+          <Button className="cart-buttons__pay pay-btn" onClick={handlePayPizza}>
             Оплатить сейчас
           </Button>
         </div>

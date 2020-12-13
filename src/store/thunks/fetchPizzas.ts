@@ -5,11 +5,14 @@ import { IPizzaTypes } from '../../types'
 import { setPizzas, setPizzasLength, setPizzasLoaded }  from '../actions/index'
 import { URL_PIZZAS, URL_LENGTH } from '../../const'
 
+type Tlength = { 
+  length: number
+}
 
 export const preFetchPizzas = () => async (dispatch: any) => {
   dispatch(setPizzasLoaded(false))
-  const { data }: AxiosResponse<number> =  await axios.get(URL_LENGTH)
-  dispatch(setPizzasLength(data))
+  const { data }: AxiosResponse<Tlength> =  await axios.get(URL_LENGTH)
+  dispatch(setPizzasLength(data.length))
 }
 
 

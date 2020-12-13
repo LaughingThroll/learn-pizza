@@ -1,12 +1,8 @@
-import { IPizzaTypes } from '../../types'
+import { IPizzasStateTypes } from '../../types'
 import { PizzasEnum } from '../enums'
-import { PizzasActions } from '../types'
+import {  PizzasActions } from '../types'
 
-interface IPizzasStateTypes {
-  pizzas: IPizzaTypes[],
-  length: number,
-  isLoaded: boolean
-}
+
 
 
 const initialState: IPizzasStateTypes = {
