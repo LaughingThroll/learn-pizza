@@ -37,7 +37,7 @@ function Home() {
       }
     })
   }, [dispatch, pizzas.length, isLoaded, activeFilter, activeSortBy])
-  
+
   return (
     <div className="container">
       <div className="content__top">

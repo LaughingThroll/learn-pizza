@@ -41,7 +41,6 @@
     ]
   },
   "proxy": "http://localhost:3004",
-  "homepage": "http://laughingthroll.github.io/learn-pizza",
   "browserslist": {
     "production": [
       ">0.2%",
