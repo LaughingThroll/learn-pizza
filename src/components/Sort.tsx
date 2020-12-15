@@ -2,14 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import sortArrow from '../assets/img/sort-arrow.svg'
 import { SortingObjectType } from './../const'
 
-
 interface SortingPropsType {
   sorters: SortingObjectType[],
-  activeSortBy: string,
+  activeSort: string,
   onSortBy: (sort: string) => void
 }
 
-function Sort({ activeSortBy, onSortBy, sorters }: SortingPropsType): JSX.Element {
+function Sort({sorters, activeSort, onSortBy }: SortingPropsType): JSX.Element {
   const [visiblePopup, setVisiblePopup] = useState<boolean>(false)
 
   const sortRef = useRef<HTMLDivElement>(null)
@@ -24,9 +23,7 @@ function Sort({ activeSortBy, onSortBy, sorters }: SortingPropsType): JSX.Elemen
   }
 
   const handleOutsideSort = ({ path }: any): void => {
-    if (!path.includes(sortRef.current)) {
-      setVisiblePopup(false)
-    }
+    if (!path.includes(sortRef.current)) setVisiblePopup(false)
   }
 
   useEffect(() => {
@@ -42,11 +39,11 @@ function Sort({ activeSortBy, onSortBy, sorters }: SortingPropsType): JSX.Elemen
       <div className="sort__label sort-label">
         <img className={`sort-label__arrow ${visiblePopup ? 'sort-label__arrow--active' : ''}`} src={sortArrow} alt="" />
         <b className="sort-label__text">Сортировка по:</b>
-        <span className="sort-label__category" onClick={togglePopup}>{sorters.find((item: SortingObjectType) => item.type === activeSortBy)?.name}</span>
+        <span className="sort-label__category" onClick={togglePopup}>{sorters.find((item: SortingObjectType) => item.type === activeSort)?.name}</span>
       </div>
       {visiblePopup && <ul className="sort__popup sort-popup">
         {sorters.map(({ name, type }, index) => {
-          return <li key={`${type}_${index}`} className={`sort-popup__item ${activeSortBy === type ? 'sort-popup__item--active' : ''}`} onClick={handleActiveSort(type)}>{name}</li>
+          return <li key={`${type}_${index}`} className={`sort-popup__item ${activeSort === type ? 'sort-popup__item--active' : ''}`} onClick={handleActiveSort(type)}>{name}</li>
         })}
       </ul> }
     </div>

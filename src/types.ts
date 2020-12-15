@@ -46,36 +46,4 @@ export interface IOneOfPizzasTypes {
   allCount: number
 }
 
-
-export type removeGroupFromCartTypes = string
-
-
-export interface IPizzasStateTypes {
-  pizzas: IPizzaTypes[],
-  length: number,
-  isLoaded: boolean
-}
-
 export type filterPayload = number | null
-
-export interface ICartStateTypes {
-  cartPizzas: CartPizzasTypes,
-  totalPrice: number,
-  totalCount: number
-}
-
-export interface IFiltersStateTypes {
-  filter: filterPayload
-}
-
-export interface ISortStateTypes {
-  sortBy: string
-}
-
-
-export interface IMainState {
-  pizzasReducer: IPizzasStateTypes,
-  cart: ICartStateTypes, 
-  sorting: ISortStateTypes,
-  filters: IFiltersStateTypes
-}

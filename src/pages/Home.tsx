@@ -1,53 +1,39 @@
-import React, { useEffect, useCallback } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useCallback } from 'react'
+import { useStore } from 'effector-react'
+import { $pizzas, $isLoadedPizzas, $pizzasLength, $cart, $category, $sortBy } from '../models/states' 
+import { setCategory } from '../models/categories/index'
+import { setSortBy } from '../models/sort/index'
+import { addToCart } from '../models/cart/index' 
 
 import { Categories, Sort, PizzaBlock, PizzaLoading } from '../components'
 import { CATEGORIES_ARR, SORTING_ARR } from '../const'
 import { flatObject } from '../utils'
-import { IPizzaTypes, IPizzasStateTypes, CartPizzasTypes, filterPayload, IMainState } from '../types'
+import { IPizzaTypes, CartPizzasTypes, filterPayload } from '../types'
 
-import { setFilter, setPizzasLoaded, setSortBy, addToCart } from '../store/actions'
-import { preFetchPizzas, fetchPizzas } from '../store/thunks/fetchPizzas'
+
 
 
 function Home() {
-  const dispatch = useDispatch()
+  const pizzas = useStore($pizzas)
+  const isLoaded = useStore($isLoadedPizzas)
+  const pizzasLength = useStore($pizzasLength)
+  const activeCategory = useStore($category)
+  const activeSort = useStore($sortBy) 
+  const cart = useStore($cart)
 
-  const { pizzas, length: lengthPizzas, isLoaded } = useSelector(({ pizzasReducer }: IMainState): IPizzasStateTypes => pizzasReducer)
-  const cartPizzas = useSelector(({ cart: { cartPizzas } }: IMainState): CartPizzasTypes  => cartPizzas)
-  const activeFilter = useSelector(({ filters: { filter } }: IMainState): filterPayload  => filter)
-  const activeSortBy = useSelector(({ sorting: { sortBy } }: IMainState): string  => sortBy)
-
-  const onFilter = useCallback((index: number | null) => dispatch(setFilter(index)), [dispatch])
-  const onSortBy = useCallback((sort: string) => dispatch(setSortBy(sort)), [dispatch])  
-
-  useEffect(() => {
-    dispatch(setPizzasLoaded(false))
-  }, [dispatch, activeFilter, activeSortBy])
-
-  useEffect(() => {
-    const preFetch = new Promise((resolve, reject) => {
-      if (!isLoaded) dispatch(preFetchPizzas())
-      return resolve(true)
-    })
-
-    preFetch.then((res) => {
-      if (res) {
-        dispatch(fetchPizzas(activeFilter, activeSortBy))
-      }
-    })
-  }, [dispatch, pizzas.length, isLoaded, activeFilter, activeSortBy])
+  const onSetCategory = useCallback((index: filterPayload) => setCategory(index), [])
+  const onSortBy = useCallback((sort: string) => setSortBy(sort), [])  
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories activeCategory={activeFilter} categories={CATEGORIES_ARR} onFilter={onFilter} />
-        <Sort activeSortBy={activeSortBy} onSortBy={onSortBy} sorters={SORTING_ARR} />
+        <Categories categories={CATEGORIES_ARR} activeCategory={activeCategory} onSetCategory={onSetCategory} />
+        <Sort sorters={SORTING_ARR} activeSort={activeSort} onSortBy={onSortBy} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        { isLoaded ? pizzas.map((pizza: IPizzaTypes) => <PizzaBlock key={`${pizza.id}_${pizza.name}`} count={cartPizzas[pizza.id] && flatObject<CartPizzasTypes, any>(cartPizzas[pizza.id], 3).length } onClickAddToCart={(pizza) => dispatch(addToCart(pizza))} {...pizza} />)
-          : Array(lengthPizzas).fill(0).map((i, index) => <PizzaLoading key={index} />) }
+        { isLoaded ? pizzas.map((pizza: IPizzaTypes) => <PizzaBlock key={`${pizza.id}_${pizza.name}`} count={cart[pizza.id] && flatObject<CartPizzasTypes, any>(cart[pizza.id], 3).length } onClickAddToCart={(pizza) => addToCart(pizza)} {...pizza} />)
+          : Array(pizzasLength).fill(0).map((i, index) => <PizzaLoading key={index} />) }
       </div>
     </div>
   )

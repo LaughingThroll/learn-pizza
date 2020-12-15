@@ -1,18 +1,17 @@
 import React from 'react'
-
-type activeType = number | null
+import { filterPayload } from '../types'
 
 interface CategoriesTypeProps {
   categories: string[],
-  activeCategory: activeType,
-  onFilter: (index: activeType) => void
+  activeCategory: filterPayload,
+  onSetCategory: (index: filterPayload) => void
 }
 
 
-const Categories = ({ activeCategory, categories, onFilter }: CategoriesTypeProps): JSX.Element => {
-  
-  const selectActive = (index: activeType) => (e: React.MouseEvent): void => {
-    onFilter(index)
+const Categories = ({ activeCategory, categories, onSetCategory }: CategoriesTypeProps): JSX.Element => {
+
+  const selectActive = (index: filterPayload) => (e: React.MouseEvent<HTMLLIElement>): void => {
+    onSetCategory(index)
   }
 
   return (

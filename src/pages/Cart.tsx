@@ -1,38 +1,37 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useStore } from 'effector-react'
 
+import { $cart, $totalPrice, $totalCount } from '../models/states'
+import { clearCart, removeGroupFromCart, plusPizza, minusPizza } from '../models/cart/index'
 import { CartEmpty, CartBody } from './../components'
 
 import { IOneOfPizzasTypes } from '../types'
 
-import { clearCart, removeGroupFromCart, plusCartPizza, minusCartPizza } from '../store/actions'
-
-
-
 function Cart() {
-  const dispatch = useDispatch()
-  const { totalCount, totalPrice, cartPizzas } = useSelector(({ cart }: any) => cart)
-
+  const cart = useStore($cart)
+  const totalPrice = useStore($totalPrice)
+  const totalCount = useStore($totalCount)
+ 
   const onClearCart = (): void => {
-    if (window.confirm('Вы действительно хотите очистить корзину?')) dispatch(clearCart)
+    if (window.confirm('Вы действительно хотите очистить корзину?')) clearCart()
   }
   const onRemoveGroupFromCart = (path: string): void => {
-    if (window.confirm('Вы действительно хотите удалить?')) dispatch(removeGroupFromCart(path))
+    if (window.confirm('Вы действительно хотите удалить?')) removeGroupFromCart(path)
   }
 
 
-  const onPlusPizza = (path: string): void => {dispatch(plusCartPizza(path))}
-  const onMinusPizza = (path: string): void => {dispatch(minusCartPizza(path))}
+  const onPlusPizza = (path: string): void => { plusPizza(path) }
+  const onMinusPizza = (path: string): void => { minusPizza(path) }
 
   const onPayPizza = () => {
     alert('Ты почти оплатил свою пиццу. Зайди в консоль, чтобы посмотреть что ты заказал')
-    console.log('Твоя пицца', cartPizzas)
+    console.log('Твоя пицца', cart)
   }
 
-  const oneOfPizzas: IOneOfPizzasTypes[] = Object.keys(cartPizzas).flatMap(id => {
-    return Object.keys(cartPizzas[id]).flatMap(type => {
-      return Object.keys(cartPizzas[id][type]).flatMap(size => {
-        const thisObj = cartPizzas[id][type][size]
+  const oneOfPizzas: IOneOfPizzasTypes[] = Object.keys(cart).flatMap(id => {
+    return Object.keys(cart[id]).flatMap(type => {
+      return Object.keys(cart[id][type]).flatMap(size => {
+        const thisObj = cart[id][type][size]
         const name = thisObj.thisPizzas.length ? thisObj.thisPizzas[0].name : ''
         const imageUrl = thisObj.thisPizzas.length ? thisObj.thisPizzas[0].imageUrl : ''
         return {
@@ -62,8 +61,6 @@ function Cart() {
       /> 
       : <CartEmpty /> }
     </div>
-
-
   )
 }
 

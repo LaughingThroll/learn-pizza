@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useStore } from 'effector-react'
 
+import { $totalPrice, $totalCount } from '../models/states'
 import logo from '../assets/img/pizza-logo.svg'
 
 import { Button } from './index'
@@ -9,7 +10,8 @@ import { Button } from './index'
 
 
 function Header() {
-  const { totalCount, totalPrice } = useSelector(({ cart }: any) => cart)
+  const totalPrice = useStore($totalPrice)
+  const totalCount = useStore($totalCount)
     
   return (
     <header className="header">
