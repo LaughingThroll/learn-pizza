@@ -1,26 +1,24 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 
-type activeType = number | null
+import PizzasStore from '../models/PizzasStore'
 
-interface CategoriesTypeProps {
+type CategoriesTypeProps = {
   categories: string[],
-  activeCategory: activeType,
-  onFilter: (index: activeType) => void
 }
 
 
-const Categories = ({ activeCategory, categories, onFilter }: CategoriesTypeProps): JSX.Element => {
+const Categories = ({ categories }: CategoriesTypeProps): JSX.Element => {
   
-  const selectActive = (index: activeType) => (e: React.MouseEvent): void => {
-    onFilter(index)
+  const selectActive = (index: number | null) => (e: React.MouseEvent): void => {
+    PizzasStore.filter = index  
   }
-
   return (
     <ul className="categories">
-      <li className={`categories__item ${activeCategory === null ? 'categories__item--active' : ''}`} onClick={selectActive(null)} >Все</li>
-      {categories.map((category, index) => <li key={category + index} className={`categories__item ${activeCategory === index ? 'categories__item--active' : ''}`} onClick={selectActive(index)}> {category} </li>)}
+      <li className={`categories__item ${ PizzasStore.filter === null ? 'categories__item--active' : ''}`} onClick={selectActive(null)} >Все</li>
+      {categories.map((category, index) => <li key={category + index} className={`categories__item ${ PizzasStore.filter === index ? 'categories__item--active' : ''}`} onClick={selectActive(index)}> {category} </li>)}
     </ul>
   )
 }
 
-export default React.memo(Categories)
+export default observer(Categories)

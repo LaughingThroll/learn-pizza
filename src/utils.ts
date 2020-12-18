@@ -7,3 +7,9 @@ export const flatObject = <T, U>(obj: U, depth: number): T[] => {
     }
   return temp
 }
+
+
+export const makeRequest = async (URL: string, options?: ResponseInit): Promise<any> => {
+  const res = await fetch(URL, options)
+  return await res.json()
+}

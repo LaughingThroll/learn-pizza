@@ -1,15 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { observer } from 'mobx-react-lite'
 
 import logo from '../assets/img/pizza-logo.svg'
 
 import { Button } from './index'
 
+import CartStore from '../models/CartStore'
 
 
-function Header() {
-  const { totalCount, totalPrice } = useSelector(({ cart }: any) => cart)
+const Header = () => {
+  const { totalCount, totalPrice } = CartStore
     
   return (
     <header className="header">
@@ -68,4 +69,4 @@ function Header() {
   )
 }
 
-export default Header
+export default observer(Header)

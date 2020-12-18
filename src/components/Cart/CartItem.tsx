@@ -1,24 +1,25 @@
 import React from 'react'
+import { observer } from 'mobx-react-lite'
 
 import { Button } from '../index'
+import CartPizzas from '../../models/CartStore'
 
 import { IOneOfPizzasTypes } from '../../types'
 
-interface ICartItemTypesProps extends IOneOfPizzasTypes {
-  onRemoveGroupFromCart: (path: string) => void,
-  onPlusPizza: (path: string) => void,
-  onMinusPizza: (path: string) => void
-}
-
-
-const CartItem = ({ id, type, size, imageUrl, name, allPrice, allCount, onRemoveGroupFromCart, onPlusPizza, onMinusPizza }: ICartItemTypesProps): JSX.Element => {
-  const handleRemoveGroupFromCart = () => onRemoveGroupFromCart(`${id}-${type}-${size}`)
+const CartItem = ({ id, type, size, imageUrl, name, allPrice, allCount }: IOneOfPizzasTypes): JSX.Element => {
+  
+  const { removeGroupFromCart, plusPizza, minusPizza } = CartPizzas
+  
+  const handleRemoveGroupFromCart = () => {
+    removeGroupFromCart(`${id}-${type}-${size}`)
+  }
   const handlePlusPizza = () => {
-    onPlusPizza(`${id}-${type}-${size}`)
+    plusPizza(`${id}-${type}-${size}`)
   }
   const handleMinusPizza = () => {
-    onMinusPizza(`${id}-${type}-${size}`)
+    minusPizza(`${id}-${type}-${size}`)
   }
+
   return (
     <div className="cart__item cart-item">
       <img
@@ -59,4 +60,4 @@ const CartItem = ({ id, type, size, imageUrl, name, allPrice, allCount, onRemove
   )
 }
 
-export default CartItem
+export default observer(CartItem)

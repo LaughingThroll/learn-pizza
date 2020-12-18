@@ -1,40 +1,35 @@
 import React, { useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import classNames from 'classnames'
 
-import Button from '../Button' 
-
-import { IPizzaTypes, ICartPizza } from '../../types'
-
+import Button from '../Button'
+import CartStore from '../../models/CartStore'
+import { IPizzaTypes } from '../../types'
 import { TYPES_PIZZAS, AVAILABLE_SIZES } from '../../const'
 
-
-
-interface IPizzaBlockPropsTypes extends IPizzaTypes  {
-  onClickAddToCart: (action: ICartPizza) => void,
-  count: number
-}
-
-function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddToCart, count }: IPizzaBlockPropsTypes): JSX.Element {
+const PizzaBlock = ({ id, name, imageUrl, price, types, sizes }: IPizzaTypes): JSX.Element => {
   const [activeType, setActiveType] = useState<number>(types[0])
   const [activeSize, setActiveSize] = useState<number>(sizes[0])
- 
+  
+  const setActiveTypePizza = (index: number) => (e: React.MouseEvent): void => setActiveType(index)
+  const setActiveSizePizza = (index: number) => (e: React.MouseEvent): void => setActiveSize(index)
 
-  const setActiveTypePizza = (index: number) => (e: React.MouseEvent): void =>  setActiveType(index)
-  const setActiveSizePizza = (index: number) => (e: React.MouseEvent): void =>  setActiveSize(index)
+  const { addToCart, getCount } = CartStore
+  const count = getCount(id)
 
   const handleAddPizza = (): void => {
-    onClickAddToCart({
-      id, 
-      name, 
-      imageUrl, 
-      price, 
-      type: TYPES_PIZZAS[activeType], 
+    addToCart({
+      id,
+      name,
+      imageUrl,
+      price,
+      type: TYPES_PIZZAS[activeType],
       size: activeSize
-      })
+    })
   }
 
   return (
-    <div  className="pizza-block">
+    <div className="pizza-block">
       <img
         className="pizza-block__image"
         src={imageUrl}
@@ -42,29 +37,29 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddToCart,
       />
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
-        
+
         <ul className="selector selector--by-dough">
           {TYPES_PIZZAS.map((name, index) => {
-            return   <li 
-            key={`${name}_${index}`} 
-            className={classNames({
-              "selector__item": true,
-              "selector__item--active": activeType === index,
-              "selector__item--disabled": !types.includes(index)
-            })} 
-            onClick={setActiveTypePizza(index)}>{name}</li>
+            return <li
+              key={`${name}_${index}`}
+              className={classNames({
+                "selector__item": true,
+                "selector__item--active": activeType === index,
+                "selector__item--disabled": !types.includes(index)
+              })}
+              onClick={setActiveTypePizza(index)}>{name}</li>
           })}
         </ul>
         <ul className="selector selector--by-sizes">
-        {AVAILABLE_SIZES.map((size, index) => {
-            return   <li 
-            key={`${size}_${index}`} 
-            className={classNames({
-              "selector__item": true,
-              "selector__item--active": activeSize === size,
-              "selector__item--disabled": !sizes.includes(size)
-            })} 
-            onClick={setActiveSizePizza(size)}>{size} см.</li>
+          {AVAILABLE_SIZES.map((size, index) => {
+            return <li
+              key={`${size}_${index}`}
+              className={classNames({
+                "selector__item": true,
+                "selector__item--active": activeSize === size,
+                "selector__item--disabled": !sizes.includes(size)
+              })}
+              onClick={setActiveSizePizza(size)}>{size} см.</li>
           })}
         </ul>
       </div>
@@ -84,11 +79,11 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddToCart,
             />
           </svg>
           <span>Добавить</span>
-        {count && <i>{count}</i>}
+          { count && <i>{ count }</i>}
         </Button>
       </div>
     </div>
   )
 }
 
-export default PizzaBlock
+export default observer(PizzaBlock)
